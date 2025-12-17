@@ -1,0 +1,338 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sms-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sms-item {
+  position: absolute;
+  animation-name: smsFloat;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.30;
+}
+
+@keyframes smsFloat {
+  0% {
+    transform: translateY(0) scale(0.9);
+    opacity: 0.20;
+  }
+  50% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateY(-700px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* الحركة الأساسية */
+@keyframes smsFloat {
+  0% {
+    transform: translateY(0) scale(0.9);
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.20;
+  }
+  100% {
+    transform: translateY(-650px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("assets/fonts/Tajawal.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Tajawal";
+  src: url("assets/fonts/Tajawal-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @apply bg-white text-brand-primary font-sans antialiased;
+  direction: rtl;
+}
+
+.main-content {
+  min-height: 80vh;
+}
+
+.prices-section {
+  position: relative;
+  background: #ededed;
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  opacity: 0;
+  transform: perspective(1200px) translateY(70px) rotateX(10deg) rotateY(-4deg)
+    scale(0.95);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.pricing-card.card-visible {
+  opacity: 1;
+  transform: perspective(1200px) translateY(0) rotateX(0deg) rotateY(0deg)
+    scale(1);
+}
+
+.hero-message-card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7ff 100%);
+  border: 1px solid rgba(17, 23, 46, 0.08);
+  box-shadow: 0 25px 45px rgba(16, 18, 41, 0.15);
+  overflow: visible;
+}
+
+.hero-message-card::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 70px;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7ff 100%);
+  border-left: 1px solid rgba(17, 23, 46, 0.08);
+  border-bottom: 1px solid rgba(17, 23, 46, 0.08);
+  border-bottom-left-radius: 18px;
+  transform: rotate(45deg);
+  box-shadow: 0 18px 25px rgba(16, 18, 41, 0.09);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pricing-card,
+  .pricing-card.card-visible {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* keep boxes rounded and add soft bevel focus */
+.standard-package-card,
+.featured-package-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(16px);
+  transition: border 0.3s ease, box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.standard-package-card {
+  background: #ffffff;
+  border: 1px solid rgba(31, 42, 69, 0.08);
+  color: #1f2a45;
+}
+
+.featured-package-card {
+  background: #ffffff;
+  border: 1px solid rgba(31, 42, 69, 0.12);
+  color: #1f2a45;
+}
+
+.standard-package-card:hover,
+.standard-package-card:focus-within,
+.featured-package-card:hover,
+.featured-package-card:focus-within {
+  background: linear-gradient(145deg, #fdfdfd, #f2f4fb);
+  border-color: rgba(31, 42, 69, 0.25);
+  box-shadow: 0 24px 48px rgba(31, 42, 69, 0.2);
+}
+
+.standard-package-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(235, 240, 255, 0.55)
+  );
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.featured-package-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(244, 246, 252, 0.8)
+  );
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.standard-package-card::after {
+  content: "";
+  position: absolute;
+  inset: -40% -20%;
+  width: 160%;
+  height: 190%;
+  border-radius: 40px;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0)
+  );
+  transform: rotate(20deg) translateX(-140%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.standard-package-card:hover::after {
+  transform: rotate(20deg) translateX(125%);
+  opacity: 0.85;
+}
+
+.featured-package-card::after {
+  content: "";
+  position: absolute;
+  inset: -30% -10%;
+  width: 140%;
+  height: 180%;
+  border-radius: 50px;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.65),
+    rgba(255, 255, 255, 0)
+  );
+  transform: rotate(18deg) translateX(-140%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.featured-package-card:hover::after {
+  transform: rotate(18deg) translateX(120%);
+  opacity: 0.85;
+}
+
+.standard-package-card > *,
+.featured-package-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card-title-chip {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  letter-spacing: 0.4px;
+}
+
+.card-title-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.standard-card-header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-weight: 1800;
+  font-size: 2.35rem;
+  letter-spacing: 0.02em;
+}
+
+.featured-card-header {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font-weight: 1200;
+  font-size: 2.35rem;
+  letter-spacing: 0.02em;
+}
+
+.pricing-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 999px;
+  padding: 0.85rem 1.25rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.pricing-cta--standard {
+  background: linear-gradient(130deg, #5c6796, #7989b9);
+  color: #fcc749;
+  box-shadow: 0 12px 26px rgba(92, 103, 150, 0.3);
+}
+
+.pricing-cta--standard:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 32px rgba(92, 103, 150, 0.35);
+}
+
+.pricing-cta--featured {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fcc749;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 12px 30px rgba(8, 44, 61, 0.35);
+}
+
+.pricing-cta--featured:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(8, 44, 61, 0.4);
+}
+
+.pricing-cta:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 3px;
+}
+
+.footer-oval {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -260px;             
+  width: 140%;              
+  height: 480px;            
+  background: #FBE68B;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  pointer-events: none;
+}
